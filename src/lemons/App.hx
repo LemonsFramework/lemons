@@ -9,8 +9,19 @@ import lemons.util.Signal;
 import lemons.sound.Sound;
 import lemons.input.keyboard.KeyCode;
 
+
+/** 
+ * Entry point for every Lemons project
+**/
 class App {
+	/** 
+	 * Main game window
+	**/
 	public static var mainWindow:sdl.Window;
+
+	/** 
+	 * 
+	**/
 	public var callbacks:WindowCallbacks;
 
 	public function new() {
@@ -39,10 +50,21 @@ class App {
 		Sound.stopEngine();
 	}
 
+	/** 
+	 * Called after the window gets initialized, override this when creating a new app
+	**/
 	public function init():Void {}
 
+	/**
+	 * Main update function
+	 * @param delta Time between the last update call in seconds
+	**/
 	public function update(delta:Float):Void {}
 
+	/**
+	 * Called when a SDL event gets called
+	 * @param event 
+	**/
 	private function onEvent(event:Event):Bool {
 		if (callbacks == null) return true;
 		switch (event.type) {
@@ -78,6 +100,9 @@ class App {
 	}
 }
 
+/**
+ * Class that holds all callbacks in SDL
+**/
 @:publicFields
 class WindowCallbacks {
 	// TODO: update Signal to allow Void as a avalible input type

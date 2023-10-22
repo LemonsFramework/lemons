@@ -1,0 +1,5 @@
+-xml docs/doc.xml
+extraParams.hxml
+-p src
+-hl dummy.hl
+lemons

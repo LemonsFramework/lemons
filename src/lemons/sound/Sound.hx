@@ -7,6 +7,7 @@ import lemons.sound.*;
 import lemons.sound.Filters.Filter;
 import lemons.sound.Effects.Effect;
 import lemons.util.IDestroyable;
+import sys.io.File;
 
 @:allow(Main)
 class Sound implements IDestroyable {
@@ -103,15 +104,13 @@ class Sound implements IDestroyable {
 		ALC.destroyContext(context);
 	}
 
-	function get_loop():Bool
-		return (AL.getSourcei(alSource, AL.LOOPING)) == 1;
+	function get_loop():Bool return (AL.getSourcei(alSource, AL.LOOPING)) == 1;
 	function set_loop(value:Bool):Bool {
 		AL.sourcei(alSource, AL.LOOPING, (value ? 1 : 0));
 		return loop = value;
 	}
 
-	function get_time():Float
-		return AL.getSourcef(alSource, AL.SEC_OFFSET);
+	function get_time():Float return AL.getSourcef(alSource, AL.SEC_OFFSET);
 	function set_time(value:Float):Float {
 		AL.sourcef(alSource, AL.SEC_OFFSET, value);
 		return volume = value;
@@ -127,15 +126,13 @@ class Sound implements IDestroyable {
 		return effect = value;
 	}
 
-	function get_volume():Float
-		return AL.getSourcef(alSource, AL.GAIN);
+	function get_volume():Float return AL.getSourcef(alSource, AL.GAIN);
 	function set_volume(value:Float):Float {
 		AL.sourcef(alSource, AL.GAIN, value);
 		return volume = value;
 	}
 
-	function get_pitch():Float
-		return AL.getSourcef(alSource, AL.PITCH);
+	function get_pitch():Float return AL.getSourcef(alSource, AL.PITCH);
 	function set_pitch(value:Float):Float {
 		AL.sourcef(alSource, AL.PITCH, value);
 		return pitch = value;
@@ -145,6 +142,7 @@ class Sound implements IDestroyable {
 		AL.source3f(alSource, AL.POSITION, value * 2 - 1, 0, 0);
 		return pan = value;
 	}
+
 	function set_velocity(value:Vector3):Vector3 {
 		AL.source3f(alSource, AL.POSITION, value.x, value.y, value.z);
 		return velocity = value;
@@ -156,5 +154,8 @@ class Sound implements IDestroyable {
 		sound.loadSoundData(SoundData.createFromBytes(data));
 		return sound;
 	}
+
+	public static function createFromFile(path:String):Sound
+		return Sound.createFromBytes(File.getBytes(path));
 
 }
