@@ -1,7 +1,8 @@
-# <img src="art/tmpLogo.png"/> lemons
+# <img src="art/tmpLogoWithText.png"/> lemons
 
-idk lemons is some kind of game framework idk
+idk lemons is some kind of game framework
 
+this only supports hashlink because fuck you !!
 
 code example:
 
@@ -19,3 +20,5 @@ class Main extends lemons.App {
         var app = new Main();
 }
 ```
+
+also if you cant read the logo at the top maybe switch to dark mode you pussy (even though i use citrus sherbert/light on mobile because my phone runs android 5 and hghdfghdgfhdgfhd as my discord theme
