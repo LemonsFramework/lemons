@@ -31,5 +31,3 @@ class Main extends App {
         var app = new Main();
 }
 ```
-
-also if you cant read the logo at the top maybe switch to dark mode you pussy (even though i use citrus sherbert/light on mobile because my phone runs android 5 and hghdfghdgfhdgfhd as my discord theme
