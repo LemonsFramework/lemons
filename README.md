@@ -1,6 +1,6 @@
 # <img src="art/tmpLogoWithText.png"/>
 
-idk lemons is some kind of game framework
+idk some kind of game framework smh my head
 
 this only supports hashlink because fuck you !!
 
