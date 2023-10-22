@@ -1,6 +1,6 @@
 # <img src="art/tmpLogoWithText.png"/>
 
-idk some kind of game framework smh my head
+idk another haxe game framework smh my head
 
 this only supports hashlink because fuck you !!
 
