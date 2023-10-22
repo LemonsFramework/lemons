@@ -1,0 +1,17 @@
+{
+  "name": "lemons",
+  "url" : "https://github.com/ThePlank/lemons/",
+  "license": "WTFPL",
+  "tags": ["hl"],
+  "description": "dumb game framework",
+  "version": "1.0.0",
+  "classPath": "src/",
+  "releasenote": "initial release, idk what to say uuggghhh *shakes butt*",
+  "contributors": ["ThePlank"],
+  "dependencies": {
+    "format": "",
+    "hlsdl": "",
+    "hlopenal": "",
+    "stb_ogg_sound": ""
+  }
+}
