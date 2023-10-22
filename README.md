@@ -1,4 +1,4 @@
-# <img src="art/tmpLogoWithText.png"/> lemons
+# <img src="art/tmpLogoWithText.png"/>
 
 idk lemons is some kind of game framework
 
