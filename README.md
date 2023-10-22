@@ -7,12 +7,23 @@ this only supports hashlink because fuck you !!
 code example:
 
 ```haxe
-class Main extends lemons.App {
+package;
+
+import sdl.GL;
+
+import sys.io.File;
+
+import lemons.App;
+import lemons.sound.Sound;
+
+class Main extends App {
+    var inst:Sound;
+    var voices:Sound;
+
     override public function init():Void {
-        var sound:lemons.sound.Sound = lemons.sound.Sound.createFromBytes(File.getBytes('D:\\dither me up.wav'));
+        var sound:Sound = Sound.createFromBytes(File.getBytes('${Sys.getCwd()}\\res\\testsong.wav'));
         sound.volume = 0.75;
         sound.loop = true;
-        sound.effect = new lemons.sound.Effects.EAXReverbEffect();
         sound.play();
     }
 
