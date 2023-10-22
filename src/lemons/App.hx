@@ -20,10 +20,13 @@ class App {
 	public static var mainWindow:sdl.Window;
 
 	/** 
-	 * 
+	 * A container for SDL signals
 	**/
 	public var callbacks:WindowCallbacks;
 
+	/** 
+	 * Creates the main window and starts the update loop, don't override this
+	**/
 	public function new() {
 		Sdl.init();
 		callbacks = new WindowCallbacks();
@@ -33,6 +36,8 @@ class App {
 			Std.parseInt(windowSize[0]), Std.parseInt(windowSize[1]));
 		mainWindow.center();
 
+		#if windowVsync mainWindow.vsync = true; #end
+
 		init();
 
 		GL.viewport(0, 0, Std.parseInt(windowSize[0]), Std.parseInt(windowSize[1]));
@@ -41,10 +46,12 @@ class App {
 		while (true) {
 			var newTime = Sys.time();
 			if (!Sdl.processEvents(onEvent)) break;
-			update(lastTime - newTime);
+
+			update(newTime - lastTime);
 			mainWindow.present();
 
 			lastTime = newTime;
+			if (mainWindow.vsync) Sys.sleep(1 / 60);
 		}
 
 		Sound.stopEngine();
@@ -107,9 +114,18 @@ class App {
 class WindowCallbacks {
 	// TODO: update Signal to allow Void as a avalible input type
 
+	/**
+	 * Not really a window event but it's in the event list so...
+	 * 
+	 * Called when the game is closed
+	**/
 	var onClose:Signal<Dynamic, Bool>;
 
 	// window
+
+	/**
+	 * Called when the window gets shown(?) idk since focus is a thing
+	**/
 	var onWindowShow:Signal<Dynamic, Void>;
 	var onWindowHide:Signal<Dynamic, Void>;
 	var onWindowExpose:Signal<Dynamic, Void>;
@@ -125,14 +141,37 @@ class WindowCallbacks {
 	var onWindowClose:Signal<Dynamic, Void>;
 
 	// mouse
+	/**
+	 * Called when the mouse is moved in the window
+	**/
 	var onMouseMove:Signal<{x:Int, y:Int}, Void>;
+	/**
+	 * Called when the mouse leaves the window but i'm not sure since this has never happened to me when testing
+	**/
 	var onMouseLeave:Signal<Dynamic, Void>;
+	/**
+	 * Called when a mouse button is pressed
+	**/
 	var onMouseDown:Signal<Int, Void>;
+	/**
+	 * Called when a mouse button is released
+	**/
 	var onMouseUp:Signal<Int, Void>;
+	/**
+	 * Called when the mouse wheel gets moved
+	**/
 	var onMouseWheel:Signal<Int, Void>;
 
 	// keyboard
+
+	/**
+	 * Called when a key is down / held down
+	**/
 	var onKeyDown:Signal<KeyCode, Void>;
+
+	/**
+	 * Called when a key is released
+	**/
 	var onKeyUp:Signal<KeyCode, Void>;
 
 

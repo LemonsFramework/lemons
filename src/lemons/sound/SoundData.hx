@@ -10,13 +10,11 @@ import hl.Format;
 import lemons.util.IDestroyable;
 import haxe.io.Path;
 
-/*
-	FILE FORMATS TO IMPLEMENT:
-	MP3
-	FLAC?
-	
-	sitll have to optimize vorbis reading
-*/
+/** 
+ * Class that holds the info and data of the sound
+ * 
+ * Basically a wrappper for openal's buffer
+**/
 class SoundData implements IDestroyable {
 	@:allow(sound.Sound)
 	public var alBuffer:AL.Buffer;
@@ -36,11 +34,20 @@ class SoundData implements IDestroyable {
 	// theres no length variable at all, not even a private variable
 	// and theres no getString function
 
+	/** 
+	 * Creates a new empty instance of `SoundData`
+	 * 
+	 * The instance won't be able to be used yet since it's empty
+	**/
 	public function new() {
 		AL.genBuffers(1, Sound.tempBytes);
 		alBuffer = AL.Buffer.ofInt(Sound.tempBytes.getI32(0));
 	}
 
+	/** 
+	 * Loads the instance of SoundData with the specified bytes, note that the only formats that are supported are WAV, OGG, MP3 and FLAC
+	 * @param bytes Bytes to load
+	**/
 	public function fromBytes(bytes:Bytes) {
 		var signature:String = bytes.getString(0, 4);
 
@@ -85,15 +92,25 @@ class SoundData implements IDestroyable {
 		}
 	}
 
+	/** 
+	 * Creates a new instance of `SoundData` and loads the specified bytes
+	 * @param bytes Bytes to load
+	**/
 	public static function createFromBytes(bytes:Bytes):SoundData {
 		var daNewData = new SoundData();
 		daNewData.fromBytes(bytes);
 		return daNewData;
 	}
 
+	@:dox(hide)
 	private function uploadToBuffer()
 		AL.bufferData(alBuffer, format, data, dataLength, sampleRate);
 
+	/** 
+	 * Helper function to get a openAL format specifer
+	 * @param channels Ammount of channels
+	 * @param bitsPerSample Bits per sample
+	**/
 	public static function getFormat(channels:Int, bitsPerSample:Int):Int // refactor this
 		return switch (channels) {
 			case 1:

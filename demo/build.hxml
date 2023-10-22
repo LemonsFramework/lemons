@@ -7,5 +7,6 @@
 
 -D windowResolution=1280,720
 -D windowTitle=Test project
+-D windowVsync
 
 -debug

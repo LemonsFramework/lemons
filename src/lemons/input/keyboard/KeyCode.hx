@@ -4,8 +4,8 @@ package lemons.input.keyboard;
 // swordcube please dont kill me :3
 
 /**
-    List of all SDL keycodes
-    taken from https://github.com/swordcube/hxsdl/blob/main/src/sdl/keyboard/KeyCode.hx (please dont kill me swordcube :pleading_face
+ * List of all SDL keycodes
+ * @see [please dont kill me swordcube :pleading_face](https://github.com/swordcube/hxsdl/blob/main/src/sdl/keyboard/KeyCode.hx)
 **/
 enum abstract KeyCode(Int) from Int to Int {
     private var K_SCANCODE_MASK = 1<<30;

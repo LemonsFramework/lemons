@@ -3,3 +3,5 @@ extraParams.hxml
 -p src
 -hl dummy.hl
 lemons
+
+-cmd buildDox.bat

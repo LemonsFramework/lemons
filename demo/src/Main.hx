@@ -1,14 +1,9 @@
 package;
 
-import sdl.GL;
-
 import lemons.App;
 import lemons.sound.Sound;
 
 class Main extends App {
-	var inst:Sound;
-	var voices:Sound;
-
 	override public function init():Void {
 		var sound:Sound = Sound.createFromFile('${Sys.getCwd()}\\res\\testsong.wav');
 		sound.volume = 0.75;
