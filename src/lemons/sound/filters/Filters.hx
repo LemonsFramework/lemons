@@ -1,4 +1,4 @@
-package lemons.sound;
+package lemons.sound.filters;
 
 import openal.*;
 import lemons.sound.Sound;

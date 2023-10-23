@@ -16,23 +16,38 @@ import haxe.io.Path;
  * Basically a wrappper for openal's buffer
 **/
 class SoundData implements IDestroyable {
-	@:allow(sound.Sound)
-	public var alBuffer:AL.Buffer;
+	@:allow(lemons.sound.Sound)
+	private var alBuffer:AL.Buffer;
 
+	/**
+	 * Format value used for OpenAL
+	**/
 	public var format:Int;
 
+	/**
+	 * The sound's sample rate
+	**/
 	public var sampleRate:Int;
+
+	/**
+	 * Bits per sample of the sound
+	**/
 	public var bitsPerSample:Int;
+
+	/**
+	 * The sound's bitrate
+	**/
 	public var bitrate:Int;
 
+	/**
+	 * The ammound of audio channels in the sound
+	**/
 	public var channels:Int;
 
-	public var data:hl.Bytes;
-	public var dataLength:Int; // i have a absolute hatred for hl.Bytes, like it's meant to be a hl-specific
-	// bytes class but its missing so many fucking features from the crossplatform haxe.io.Bytes
-	// like why are some things just completley gone in it
-	// theres no length variable at all, not even a private variable
-	// and theres no getString function
+	/**
+	 * Actual data of the sound
+	**/
+	public var data:Bytes;
 
 	/** 
 	 * Creates a new empty instance of `SoundData`
@@ -64,28 +79,30 @@ class SoundData implements IDestroyable {
 				var b = 0, f = 0, s = 0, c = 0;
 				Format.oggInfo(reader, b, f, s, c);
 
-				data = new hl.Bytes(s * c * 2);
-				var offset = 0;
+				data = Bytes.alloc(s * c * 2);
+				var offset:Int = 0;
 				while (true) {
-					offset = Format.oggRead(reader, data.offset(offset), 44100 * (c * 2), 2);
-					if (offset == 0)
+					var balls:Int = Format.oggRead(reader, hl.Bytes.fromBytes(data).offset(offset), 4096, 2);
+					if (balls == 0)
 						break;
+					offset += balls;
 				}
 		        channels = c;
 		        sampleRate = f;
 		        format = getFormat(c, 16);
-				dataLength = s * c * 2;
 
 				uploadToBuffer();
 
 			case 'riff':
 				var wavFile:Data.WAVE = new Reader(new BytesInput(bytes)).read();
+
 				format = getFormat(wavFile.header.channels, wavFile.header.bitsPerSample);
 				sampleRate = wavFile.header.samplingRate;
 				channels = wavFile.header.channels;
 				bitsPerSample = wavFile.header.bitsPerSample;
+
 				data = wavFile.data;
-				dataLength = wavFile.data.length;
+
 				uploadToBuffer();
 			default:
 				throw 'unknown sound format!!!\nfound signature: ${signature}';
@@ -104,7 +121,7 @@ class SoundData implements IDestroyable {
 
 	@:dox(hide)
 	private function uploadToBuffer()
-		AL.bufferData(alBuffer, format, data, dataLength, sampleRate);
+		AL.bufferData(alBuffer, format, data, data.length, sampleRate);
 
 	/** 
 	 * Helper function to get a openAL format specifer

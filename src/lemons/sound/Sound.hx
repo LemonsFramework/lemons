@@ -3,13 +3,14 @@ package lemons.sound;
 import openal.*;
 import hl.Bytes;
 import lemons.geom.Vector3;
-import lemons.sound.*;
-import lemons.sound.Filters.Filter;
-import lemons.sound.Effects.Effect;
+
+import lemons.sound.SoundData;
+import lemons.sound.filters.Filters.Filter;
+import lemons.sound.effects.Effects.Effect;
 import lemons.util.IDestroyable;
+
 import sys.io.File;
 
-@:allow(Main)
 class Sound implements IDestroyable {
 	public static var tempBytes:Bytes;
 	public var alSource:AL.Source;

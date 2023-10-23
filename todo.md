@@ -3,11 +3,11 @@
 - sound ❌ 50%
 	- filters ✅
 	- effects ✅
-	- formats ❌ 25%
+	- formats ❌ 50%
 		- wave ✅
 		- mp3 ❌
 		- flac ❌
-		- ogg ❌
+		- ogg ✅
 	- groups ❌
 
 - display

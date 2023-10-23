@@ -70,8 +70,9 @@ class App {
 
 	/**
 	 * Called when a SDL event gets called
-	 * @param event 
+	 * @param event The SDL event in question:
 	**/
+	@:dox(show)
 	private function onEvent(event:Event):Bool {
 		if (callbacks == null) return true;
 		switch (event.type) {
@@ -141,6 +142,7 @@ class WindowCallbacks {
 	var onWindowClose:Signal<Dynamic, Void>;
 
 	// mouse
+
 	/**
 	 * Called when the mouse is moved in the window
 	**/

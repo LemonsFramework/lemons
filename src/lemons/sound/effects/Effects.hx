@@ -1,12 +1,17 @@
-package lemons.sound;
+package lemons.sound.effects;
 
 import openal.*;
 import lemons.sound.Sound;
 import lemons.util.IDestroyable;
 
+/**
+ * Base effect class. don't use this by itself.
+**/
+@:dox(hide)
 class Effect implements IDestroyable {
-	@:allow(sound.Sound)
-	public var alEffect:EFX.Effect;
+	@:allow(lemons.sound.Sound)
+	private var alEffect:EFX.Effect;
+
 	public function new(effectType:Int) {
 		EFX.genEffects(1, Sound.tempBytes);
 		alEffect = EFX.Effect.ofInt(Sound.tempBytes.getI32(0));	
