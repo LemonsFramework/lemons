@@ -1,4 +1,3 @@
 -lib hlsdl
 -lib hlopenal
 -lib format
--lib stb_ogg_sound
