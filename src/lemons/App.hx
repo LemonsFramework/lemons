@@ -3,17 +3,29 @@ package lemons;
 import sdl.GL;
 import sdl.Event;
 import sdl.Sdl;
+import sdl.Sdl.SDLHint;
+import sdl.Window;
 import sdl.Event.WindowStateChange;
-import lemons.macro.DefineMacro;
-import lemons.util.Signal;
-import lemons.sound.Sound;
-import lemons.input.keyboard.KeyCode;
 
+import lemons.input.keyboard.KeyCode;
+import lemons.macro.DefineMacro;
+import lemons.sound.Sound;
+import lemons.geom.Matrix4;
+
+import lemons.display.Scene;
+import lemons.display.Sprite;
+
+import lemons.util.Signal;
 
 /** 
  * Entry point for every Lemons project
 **/
 class App {
+
+	private static var _glVao:VertexArray;
+	private static var _glVbo:Buffer;
+	private static var _glEbo:Buffer;
+
 	/** 
 	 * Main game window
 	**/
@@ -24,23 +36,32 @@ class App {
 	**/
 	public var callbacks:WindowCallbacks;
 
+
+	public var scene:Scene;
+
 	/** 
 	 * Creates the main window and starts the update loop, don't override this
 	**/
 	public function new() {
 		Sdl.init();
+
 		callbacks = new WindowCallbacks();
 
 		var windowSize = DefineMacro.getDefineValue('windowResolution').split(',');
 		mainWindow = new sdl.Window(DefineMacro.getDefineValue('windowTitle'), 
-			Std.parseInt(windowSize[0]), Std.parseInt(windowSize[1]));
+			Std.parseInt(windowSize[0]), Std.parseInt(windowSize[1]), 0, 0, 
+			Window.SDL_WINDOW_SHOWN | Window.SDL_WINDOW_RESIZABLE);
 		mainWindow.center();
 
+		initBuffers();
+
 		#if windowVsync mainWindow.vsync = true; #end
+		GL.viewport(0, 0, Std.parseInt(windowSize[0]), Std.parseInt(windowSize[1]));
+		Sprite.projection = Matrix4.orthographic(0, Std.parseInt(windowSize[0]), Std.parseInt(windowSize[1]), 0);
+
+		scene = new Scene();
 
 		init();
-
-		GL.viewport(0, 0, Std.parseInt(windowSize[0]), Std.parseInt(windowSize[1]));
 
 		var lastTime = Sys.time();
 		while (true) {
@@ -48,6 +69,7 @@ class App {
 			if (!Sdl.processEvents(onEvent)) break;
 
 			update(newTime - lastTime);
+			scene.draw();
 			mainWindow.present();
 
 			lastTime = newTime;
@@ -57,6 +79,43 @@ class App {
 		Sound.stopEngine();
 	}
 
+
+	private function initBuffers() {
+		var vertex:Array<Single> = [
+			1, 1, 	1, 1, // top right
+			1, -1, 	1, 0, // bottom right
+			-1, -1, 0, 0, // bottom left
+			-1, 1, 	0, 1, // top left
+		]; 
+
+		var indices:Array<UInt> = [
+			0, 1, 3, // first triangle
+			1, 2, 3  // second triangle
+		];
+
+		var vertexBytes = hl.Bytes.getArray(vertex); 
+		var indiceBytes = hl.Bytes.getArray(indices); 
+		
+		_glVbo = GL.createBuffer();
+		_glEbo = GL.createBuffer();
+ 
+		_glVao = GL.createVertexArray();
+
+		GL.bindBuffer(GL.ARRAY_BUFFER, _glVbo);
+		GL.bufferData(GL.ARRAY_BUFFER, vertex.length * 4, vertexBytes, GL.STATIC_DRAW); 
+
+		GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, _glEbo);
+		GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, indices.length * 4, indiceBytes, GL.STATIC_DRAW);
+
+		GL.bindVertexArray(_glVao);
+
+		GL.vertexAttribPointer(0, 2, GL.FLOAT, false, 4 * 4, 0);
+		GL.enableVertexAttribArray(0);
+
+		GL.vertexAttribPointer(1, 2, GL.FLOAT, false, 4 * 4, 2 * 4);
+		GL.enableVertexAttribArray(1);
+	}
+
 	/** 
 	 * Called after the window gets initialized, override this when creating a new app
 	**/
@@ -64,7 +123,7 @@ class App {
 
 	/**
 	 * Main update function
-	 * @param delta Time between the last update call in seconds
+	 * @param Delta time between the last update call in seconds
 	**/
 	public function update(delta:Float):Void {}
 

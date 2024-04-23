@@ -9,9 +9,9 @@
   "releasenote": "initial release, idk what to say uuggghhh *shakes butt*",
   "contributors": ["ThePlank"],
   "dependencies": {
-    "format": "",
-    "hlsdl": "",
-    "hlopenal": "",
-    "stb_ogg_sound": ""
+	"format": "",
+	"hlsdl": "",
+	"hlopenal": "",
+	"stb_ogg_sound": ""
   }
 }

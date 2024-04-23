@@ -2,6 +2,7 @@
 extraParams.hxml
 -p src
 -hl dummy.hl
+-D gen_docs
 lemons
 
 -cmd buildDox.bat

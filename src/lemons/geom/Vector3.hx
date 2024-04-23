@@ -1,11 +1,11 @@
 package lemons.geom;
 
 class Vector3 {
-	public var x:Int;
-	public var y:Int;
-	public var z:Int;
+	public var x:Float;
+	public var y:Float;
+	public var z:Float;
 
-	public function new(x:Int, y:Int, z:Int) {
+	public function new(x:Float, y:Float, z:Float) {
 		this.x = x;
 		this.y = y;
 		this.z = z;

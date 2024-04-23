@@ -104,11 +104,11 @@ class Format {
 	// mp3
 
 	@:hlNative("fmt", "mp3_open")
-	public static function openMp3(bytes:hl.Bytes, size:Int):Mp3
+	public static function openMp3(#if (hl_ver >= "1.13.0") bytes:hl.Bytes, size:Int #end):Mp3
 		return null;
 
-	// @:hlNative("fmt", "ogg_info")
-	// public static function mp3FrameInfo(mp3:Mp3, bitrate:hl.Ref<Int>, channels:hl.Ref<Int>, frameBytes:hl.Ref<Int>, hz:hl.Ref<Int>, layer:hl.Ref<Int>):Void {}
+	@:hlNative("fmt", "mp3_frame_info")
+	public static function mp3FrameInfo(mp3:Mp3, bitrate:hl.Ref<Int>, channels:hl.Ref<Int>, frameBytes:hl.Ref<Int>, hz:hl.Ref<Int>, layer:hl.Ref<Int>):Void {}
 
 	@:hlNative("fmt", "mp3_decode_frame")
 	public static function mp3DecodeFrame(mp3:Mp3, bytes:hl.Bytes, size:Int, position:Int, output:hl.Bytes, outputSize:Int, offset:Int):Int

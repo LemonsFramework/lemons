@@ -11,4 +11,8 @@
 	- groups ❌
 
 - display
-	- i forgor ill fill this out later
+	- drivers ❌
+		- vulkan ❌
+		- directx (either 12 or 11) ❌
+		- fallback opengl ❌
+	- shading language (LSL) ❌

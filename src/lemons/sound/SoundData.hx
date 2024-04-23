@@ -1,12 +1,14 @@
 package lemons.sound;
 
-import format.wav.*;
+import format.wav.Reader as WavReader;
+import format.wav.Data.WAVE as WavData;
 import openal.*;
 import haxe.io.Bytes;
 import haxe.io.BytesInput;
 import lemons.sound.Sound;
 import hl.Ref;
 import hl.Format;
+import hl.Format.OGG;
 import lemons.util.IDestroyable;
 import haxe.io.Path;
 
@@ -67,14 +69,22 @@ class SoundData implements IDestroyable {
 		var signature:String = bytes.getString(0, 4);
 
 		switch (signature.toLowerCase()) {
-			case 'flac':
+			case 'flac': // fLaC
 				throw 'unimplemented!! check back later!';
 
-			case 'id3':
-				// var mpegFile = new format.mp3.Reader(new BytesInput(bytes)).read();
-				// if (format.mp3.Tools.isInvalidFrameHeader(mpegFile)) throw 'kill';
-			case 'oggs':
-				var reader = Format.openOgg(bytes, bytes.length);
+			case 'id3': // MP3
+				var reader:Mp3 = Format.openMp3(#if (hl_ver >= "1.13.0") bytes, bytes.length #end);
+				// technically unneeded arguments since the c function doesent even define them
+				// but the prim definition expects them to be here so idk
+				data = Bytes.alloc(1);
+				Format.mp3DecodeFrame(reader, bytes, 1, 0, data, 1, 0);
+
+				var b = 0, c = 0, fb = 0, h = 0, l = 0;
+				Format.mp3FrameInfo(reader, b, c, fb, h, l);
+				trace(b, c, fb, h, l);
+
+			case 'oggs': // Vorbis
+				var reader:OGG = Format.openOgg(bytes, bytes.length);
 
 				var b = 0, f = 0, s = 0, c = 0;
 				Format.oggInfo(reader, b, f, s, c);
@@ -87,14 +97,14 @@ class SoundData implements IDestroyable {
 						break;
 					offset += balls;
 				}
-		        channels = c;
-		        sampleRate = f;
-		        format = getFormat(c, 16);
+				channels = c;
+				sampleRate = f;
+				format = getFormat(c, 16);
 
 				uploadToBuffer();
 
-			case 'riff':
-				var wavFile:Data.WAVE = new Reader(new BytesInput(bytes)).read();
+			case 'riff': // WAV
+				var wavFile:WavData = new WavReader(new BytesInput(bytes)).read();
 
 				format = getFormat(wavFile.header.channels, wavFile.header.bitsPerSample);
 				sampleRate = wavFile.header.samplingRate;
@@ -132,18 +142,14 @@ class SoundData implements IDestroyable {
 		return switch (channels) {
 			case 1:
 				switch (bitsPerSample) {
-					case 8:
-						AL.FORMAT_MONO8;
-					case 16:
-						AL.FORMAT_MONO16;
+					case 8: AL.FORMAT_MONO8;
+					case 16: AL.FORMAT_MONO16;
 					default: throw 'Invalid ammount of bits per sample! $bitsPerSample';
 				}
 			case 2:
 				switch (bitsPerSample) {
-					case 8:
-						AL.FORMAT_STEREO8;
-					case 16:
-						AL.FORMAT_STEREO16;
+					case 8: AL.FORMAT_STEREO8;
+					case 16: AL.FORMAT_STEREO16;
 					default: throw 'Invalid ammount of bits per sample! $bitsPerSample';
 				}
 			default: throw 'Invalid ammount of channels! $channels';
