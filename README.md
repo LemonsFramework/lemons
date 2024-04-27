@@ -1,4 +1,9 @@
-# <img src="art/tmpLogoWithText.png"/>
+> [!CAUTION]
+> this repository is VERY old, and a rewrite is going to happen soon.
+> currently, lemons is using the builtin hashlink extensions for openal, opengl and sdl etc, but they lack a lot of functionality that i want.
+> oh also the entire redering pipeline sucks and its broken
+
+# <img src="art/tmpLogoWithText.png"/> (old logo)
 
 idk another haxe game framework smh my head
 
