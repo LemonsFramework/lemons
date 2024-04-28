@@ -16,7 +16,7 @@ class Main {
 
 		var argThing:String = args.shift();
 		switch (argThing) {
-			case '--help':
+			case 'help':
 				Sys.println('\033[0;33mlemons\033[0m - 2d game framework i think');
 				Sys.println('	help - displays this message');
 				Sys.println('	rebuild - rebuilds the native library for lemons');
