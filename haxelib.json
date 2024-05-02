@@ -9,9 +9,7 @@
   "releasenote": "initial release",
   "contributors": ["ThePlank"],
   "dependencies": {
-	"format": "",
-	"hlsdl": "",
-	"hlopenal": ""
+	"format": ""
   },
   "main": "tools.Main"
 }

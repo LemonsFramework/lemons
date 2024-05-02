@@ -2,11 +2,10 @@ package tools;
 
 class Main {
 	public function new() {
-		originalPath = Sys.getCwd();
 		Sys.setCwd(libPath);
 
 		var args = Sys.args();
-		args.pop();
+		originalPath = args.pop();
 
 		if (args.length == 0) {
 			Sys.println('\033[0;33mlemons\033[0m - 2d game framework i think');
@@ -21,6 +20,11 @@ class Main {
 				Sys.println('	help - displays this message');
 				Sys.println('	rebuild - rebuilds the native library for lemons');
 				Sys.println('	build - builds the project that you\'re located in');
+				Sys.println('	create - creates a project');
+			case 'build':
+				new tools.commands.BuildCommand();
+			case 'display':
+				new tools.commands.DisplayCommand();
 			case 'rebuild':
 				new tools.commands.RebuildCommand();
 			default:
