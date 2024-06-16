@@ -11,6 +11,8 @@ class Project {
 	var resourceFolder:String = '';
 	var mainClass:String = '';
 
+	var preferedRenderer:String = '';
+
 	var gameWidth:Int = 0;
 	var gameHeight:Int = 0;
 
@@ -39,6 +41,8 @@ class Project {
 		windowTitle = projectFile.sections['window']['title'] ?? 'lemons project';
 		windowResizable = projectFile.sections['window']['resizable'] ?? true;
 
+		preferedRenderer = projectFile.globalVariables['renderer'] ?? 'OPENGL'; // TODO: add "BEST" option where the game checks what renderers are avalible on the gpu, probabbly in a list of vulkan, then directx and at last opengl
+
 		for (defineName => define in projectFile.sections['defines'])
 			defines[defineName] = Std.string(define); // in this case we want the value to be a string
 
@@ -55,8 +59,9 @@ class Project {
 		for (defineName => define in defines) list.push('-D $defineName${define == '' ? '' : '=\"$define\"'}');
 		for (library => version in libraries) list.push('-L $library${version == '' ? '' : ':$version'}');
 		list.push('-L lemons');
-
+	
 		list.push('-D gameSize=${gameWidth}x${gameHeight}');
+		list.push('-D renderer=${preferedRenderer}');
 
 		final windowSettings = {title: windowTitle, resizable: windowResizable};
 		list.push('-D windowSettings=${run(windowSettings)}');
