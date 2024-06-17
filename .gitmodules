@@ -1,0 +1,3 @@
+[submodule "liblemons"]
+	path = liblemons
+	url = https://github.com/LemonsFramework/liblemons
