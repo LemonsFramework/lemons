@@ -6,11 +6,14 @@ class Time {
 
 	static function get_fps():Int return Math.round(1 / delta);
 
+	static public var desiredDelta:Float = 1 / 60;
+
 	static var lastTimestamp:Float = 0;
 	static public function startLoop(updateFunc:Void->Void, app:lemons.App) {
 		while (app.window.live) {
 			final time:Float = app.window.time;
 			delta = time - lastTimestamp;
+			if (delta <= desiredDelta) continue;
 			lastTimestamp = time;
 
 			updateFunc();

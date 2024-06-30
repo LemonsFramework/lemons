@@ -5,6 +5,9 @@ import tools.project.Project;
 import tools.project.Ini;
 
 class BuildCommand {
+	public var parsedProject:Project;
+	public var exitCode:Int;
+
 	public function new() {
 		Sys.setCwd(originalPath);
 
@@ -17,8 +20,12 @@ class BuildCommand {
 			return;
 		}
 
-		var parsedProject:Project = new Project(new Ini(project));
+		parsedProject = new Project(new Ini(project));
 
-		Sys.command('haxe ' + parsedProject.toArgList().join(' '));
+		exitCode = Sys.command('haxe ' + parsedProject.toArgList().join(' '));
+
+		var libraryFiles:Array<String> = sys.FileSystem.readDirectory(libPath + '/liblemons/out/').filter((str) -> return !str.contains('.pdb')); 
+		for (file in libraryFiles)
+			sys.io.File.copy(libPath + '/liblemons/out/' + file, parsedProject.getOutputPath() + '/' + file);
 	}
 }

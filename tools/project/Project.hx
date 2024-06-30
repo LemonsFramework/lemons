@@ -5,24 +5,26 @@ import haxe.Serializer.run;
 
 class Project {
 
-	var sources:Array<String> = [];
 	var output:String = '';
 	var filename:String = '';
-	var resourceFolder:String = '';
-	var mainClass:String = '';
 
-	var preferedRenderer:String = '';
+	public var sources:Array<String> = [];
 
-	var gameWidth:Int = 0;
-	var gameHeight:Int = 0;
+	public var resourceFolder:String = '';
+	public var mainClass:String = '';
 
-	var windowTitle:String = '';
-	var windowResizable:Bool = false;
+	public var preferedRenderer:String = '';
 
-	var defines:Map<String, String> = [];
-	var libraries:Map<String, String> = [];
+	public var gameWidth:Int = 0;
+	public var gameHeight:Int = 0;
 
-	var useCCompilation:Bool = false;
+	public var windowTitle:String = '';
+	public var windowResizable:Bool = false;
+
+	public var defines:Map<String, String> = [];
+	public var libraries:Map<String, String> = [];
+
+	public var useCCompilation:Bool = false;
 
 	public function new(projectFile:Ini, ?useCCompilation:Bool = false) {
 		this.useCCompilation = useCCompilation;
@@ -53,7 +55,7 @@ class Project {
 	public function toArgList():Array<String> {
 		var list:Array<String> = [];
 
-		list.push('--hl ' + '$output/$filename${useCCompilation ? '.c' : '.hl'}'.normalize());
+		list.push('--hl ' + getOutputPath() + '/' + getOutputFilename());
 		list.push('-m $mainClass');
 		for (source in sources) list.push('-p $source');
 		for (defineName => define in defines) list.push('-D $defineName${define == '' ? '' : '=\"$define\"'}');
@@ -69,4 +71,9 @@ class Project {
 		return list;
 	}
 
+	public function getOutputPath():String 
+		return output.normalize();
+
+	public function getOutputFilename():String 
+		return '$filename${useCCompilation ? '.c' : '.hl'}'.normalize();
 }

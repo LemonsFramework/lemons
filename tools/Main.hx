@@ -27,6 +27,8 @@ class Main {
 				new tools.commands.DisplayCommand();
 			case 'rebuild':
 				new tools.commands.RebuildCommand();
+			case 'test':
+				new tools.commands.TestCommand();
 			default:
 				Sys.println('\033[1;31merm... error\033[0m invalid command: $argThing');
 

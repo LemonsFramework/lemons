@@ -55,7 +55,7 @@ class OpenGL {
 	public static final GL_TRUE:Int = 1;
 	public static final GL_ONE:Int = 1;
 	public static final GL_INVALID_INDEX:Int = 0xFFFFFFFF;
-	public static final GL_TIMEOUT_IGNORED:Int = 0xFFFFFFFFFFFFFFFF;
+	// public static final GL_TIMEOUT_IGNORED:Int = 0xFFFFFFFFFFFFFFFF;
 	public static final GL_POINTS:Int = 0x0000;
 	public static final GL_LINES:Int = 0x0001;
 	public static final GL_LINE_LOOP:Int = 0x0002;
@@ -1332,6 +1332,8 @@ class OpenGL {
 	public static final GL_CLEAR_TEXTURE:Int = 0x9365;
 	public static final GL_NUM_SAMPLE_COUNTS:Int = 0x9380;
 
+	public static function gladLoadGl():Int { return 0; }
+
 	public static function glActiveShaderProgram(pipeline:Int, program:Int):Void {}
 	public static function glActiveTexture(texture:Int):Void {}
 	public static function glAttachShader(program:Int, shader:Int):Void {}
@@ -1413,9 +1415,9 @@ class OpenGL {
 	public static function glCreateShader(type:Int):Int { return 0; }
 	public static function glCreateShaderProgramv(type:Int, count:Int, strings:hl.NativeArray<hl.Bytes>):Int { return 0; }
 	public static function glCullFace(mode:Int):Void {}
-	public static function glDebugMessageCallback(callback:(Int->Int->Int->Int->Int->hl.Bytes), userParam:hl.Bytes):Void {}
-	public static function glDebugMessageControl(source:Int, type:Int, severity:Int, count:Int, ids:hl.Ref<Int>, enabled:Int):Void {}
-	public static function glDebugMessageInsert(source:Int, type:Int, id:Int, severity:Int, length:Int, buf:String):Void {}
+	// public static function glDebugMessageCallback(callback:(Int->Int->Int->Int->Int)->hl.Bytes, userParam:hl.Bytes):Void {}
+	// public static function glDebugMessageControl(source:Int, type:Int, severity:Int, count:Int, ids:hl.Ref<Int>, enabled:Int):Void {}
+	// public static function glDebugMessageInsert(source:Int, type:Int, id:Int, severity:Int, length:Int, buf:String):Void {}
 	public static function glDeleteBuffers(n:Int, buffers:hl.Ref<Int>):Void {}
 	public static function glDeleteFramebuffers(n:Int, framebuffers:hl.Ref<Int>):Void {}
 	public static function glDeleteProgram(program:Int):Void {}
@@ -1737,9 +1739,9 @@ class OpenGL {
 	public static function glTexCoordP4uiv(type:Int, coords:hl.Ref<Int>):Void {}
 	public static function glTexImage1D(target:Int, level:Int, internalformat:Int, width:Int, border:Int, format:Int, type:Int, pixels:hl.Bytes):Void {}
 	public static function glTexImage2D(target:Int, level:Int, internalformat:Int, width:Int, height:Int, border:Int, format:Int, type:Int, pixels:hl.Bytes):Void {}
-	public static function glTexImage2DMultisample(target:Int, samples:Int, internalformat:Int, width:Int, height:Int, fixedsamplelocations:Int):Void {}
+	public static function glTexImage2_d_multisample(target:Int, samples:Int, internalformat:Int, width:Int, height:Int, fixedsamplelocations:Int):Void {}
 	public static function glTexImage3D(target:Int, level:Int, internalformat:Int, width:Int, height:Int, depth:Int, border:Int, format:Int, type:Int, pixels:hl.Bytes):Void {}
-	public static function glTexImage3DMultisample(target:Int, samples:Int, internalformat:Int, width:Int, height:Int, depth:Int, fixedsamplelocations:Int):Void {}
+	public static function glTexImage3_d_multisample(target:Int, samples:Int, internalformat:Int, width:Int, height:Int, depth:Int, fixedsamplelocations:Int):Void {}
 	public static function glTexParameterIiv(target:Int, pname:Int, params:hl.Ref<Int>):Void {}
 	public static function glTexParameterIuiv(target:Int, pname:Int, params:hl.Ref<Int>):Void {}
 	public static function glTexParameterf(target:Int, pname:Int, param:hl.F32):Void {}
@@ -1748,9 +1750,9 @@ class OpenGL {
 	public static function glTexParameteriv(target:Int, pname:Int, params:hl.Ref<Int>):Void {}
 	public static function glTexStorage1D(target:Int, levels:Int, internalformat:Int, width:Int):Void {}
 	public static function glTexStorage2D(target:Int, levels:Int, internalformat:Int, width:Int, height:Int):Void {}
-	public static function glTexStorage2DMultisample(target:Int, samples:Int, internalformat:Int, width:Int, height:Int, fixedsamplelocations:Int):Void {}
+	public static function glTexStorage2_d_multisample(target:Int, samples:Int, internalformat:Int, width:Int, height:Int, fixedsamplelocations:Int):Void {}
 	public static function glTexStorage3D(target:Int, levels:Int, internalformat:Int, width:Int, height:Int, depth:Int):Void {}
-	public static function glTexStorage3DMultisample(target:Int, samples:Int, internalformat:Int, width:Int, height:Int, depth:Int, fixedsamplelocations:Int):Void {}
+	public static function glTexStorage3_d_multisample(target:Int, samples:Int, internalformat:Int, width:Int, height:Int, depth:Int, fixedsamplelocations:Int):Void {}
 	public static function glTexSubImage1D(target:Int, level:Int, xoffset:Int, width:Int, format:Int, type:Int, pixels:hl.Bytes):Void {}
 	public static function glTexSubImage2D(target:Int, level:Int, xoffset:Int, yoffset:Int, width:Int, height:Int, format:Int, type:Int, pixels:hl.Bytes):Void {}
 	public static function glTexSubImage3D(target:Int, level:Int, xoffset:Int, yoffset:Int, zoffset:Int, width:Int, height:Int, depth:Int, format:Int, type:Int, pixels:hl.Bytes):Void {}
@@ -1872,8 +1874,8 @@ class OpenGL {
 	public static function glVertexAttribI4ui(index:Int, x:Int, y:Int, z:Int, w:Int):Void {}
 	public static function glVertexAttribI4uiv(index:Int, v:hl.Ref<Int>):Void {}
 	public static function glVertexAttribI4usv(index:Int, v:hl.Ref<Int>):Void {}
-	public static function glVertexAttribIFormat(attribindex:Int, size:Int, type:Int, relativeoffset:Int):Void {}
-	public static function glVertexAttribIPointer(index:Int, size:Int, type:Int, stride:Int, pointer:hl.Bytes):Void {}
+	public static function glVertexAttrib_i_format(attribindex:Int, size:Int, type:Int, relativeoffset:Int):Void {}
+	public static function glVertexAttrib_i_pointer(index:Int, size:Int, type:Int, stride:Int, pointer:hl.Bytes):Void {}
 	public static function glVertexAttribL1d(index:Int, x:hl.F64):Void {}
 	public static function glVertexAttribL1dv(index:Int, v:hl.Ref<hl.F64>):Void {}
 	public static function glVertexAttribL2d(index:Int, x:hl.F64, y:hl.F64):Void {}
@@ -1882,8 +1884,8 @@ class OpenGL {
 	public static function glVertexAttribL3dv(index:Int, v:hl.Ref<hl.F64>):Void {}
 	public static function glVertexAttribL4d(index:Int, x:hl.F64, y:hl.F64, z:hl.F64, w:hl.F64):Void {}
 	public static function glVertexAttribL4dv(index:Int, v:hl.Ref<hl.F64>):Void {}
-	public static function glVertexAttribLFormat(attribindex:Int, size:Int, type:Int, relativeoffset:Int):Void {}
-	public static function glVertexAttribLPointer(index:Int, size:Int, type:Int, stride:Int, pointer:hl.Bytes):Void {}
+	public static function glVertexAttrib_l_format(attribindex:Int, size:Int, type:Int, relativeoffset:Int):Void {}
+	public static function glVertexAttrib_l_pointer(index:Int, size:Int, type:Int, stride:Int, pointer:hl.Bytes):Void {}
 	public static function glVertexAttribP1ui(index:Int, type:Int, normalized:Int, value:Int):Void {}
 	public static function glVertexAttribP1uiv(index:Int, type:Int, normalized:Int, value:hl.Ref<Int>):Void {}
 	public static function glVertexAttribP2ui(index:Int, type:Int, normalized:Int, value:Int):Void {}

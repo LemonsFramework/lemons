@@ -31,7 +31,9 @@ class App {
 
 		init();
 
-		Time.startLoop(() -> {}, this);
+		Time.startLoop(() -> {
+			renderer.prepare();
+		}, this);
 	}
 
 	/** 
