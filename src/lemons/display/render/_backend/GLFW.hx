@@ -1,8 +1,8 @@
 package lemons.display.render._backend;
 
-typedef NativeGLFWMonitor = hl.Abstract<"GLFWmonitor*">;
-typedef NativeGLFWWindow = hl.Abstract<"GLFWwindow*">;
-typedef NativeGLFWCursor = hl.Abstract<"GLFWcursor*">;
+typedef NativeGLFWMonitor = hl.I64;
+typedef NativeGLFWWindow = hl.I64;
+typedef NativeGLFWCursor = hl.I64;
 
 @:structInit
 class JoystickState {
@@ -361,14 +361,14 @@ class GLFW {
 	public static function glfwSwapInterval(interval:Int):Void {}
 	public static function glfwExtensionSupported(extension:String):Int { return 0; }
 
-	public static function glfwGetPrimaryMonitor():NativeGLFWMonitor { return null; }
+	public static function glfwGetPrimaryMonitor():NativeGLFWMonitor { return 0; }
 	public static function glfwGetMonitorPos(monitor:NativeGLFWMonitor, xPos:hl.Ref<Int>, yPos:hl.Ref<Int>):Void {}
 	public static function glfwGetMonitorWorkarea(monitor:NativeGLFWMonitor, xPos:hl.Ref<Int>, yPos:hl.Ref<Int>, width:hl.Ref<Int>, height:hl.Ref<Int>):Void {}
 	public static function glfwGetMonitorPhysicalSize(monitor:NativeGLFWMonitor, widthMM:hl.Ref<Int>, heightMM:hl.Ref<Int>):Void {}
 	public static function glfwGetMonitorContentScale(monitor:NativeGLFWMonitor, xScale:hl.Ref<hl.F32>, yScale:hl.Ref<hl.F32>):Void {}
 	public static function glfwGetMonitorName(monitor:NativeGLFWMonitor):hl.Bytes { return null; }
 
-	public static function glfwCreateWindow(width:Int, height:Int, title:String, monitor:NativeGLFWMonitor, share:Null<NativeGLFWWindow>):NativeGLFWWindow { return null; }
+	public static function glfwCreateWindow(width:Int, height:Int, title:String, monitor:NativeGLFWMonitor, share:NativeGLFWWindow):NativeGLFWWindow { return 0; }
 	public static function glfwDestroyWindow(window:NativeGLFWWindow):Void {}
 	public static function glfwWindowShouldClose(window:NativeGLFWWindow):Int { return 0; }
 	public static function glfwSetWindowShouldClose(window:NativeGLFWWindow, value:Int):Void {}
@@ -393,19 +393,19 @@ class GLFW {
 	public static function glfwHideWindow(window:NativeGLFWWindow):Void {}
 	public static function glfwFocusWindow(window:NativeGLFWWindow):Void {}
 	public static function glfwRequestWindowAttention(window:NativeGLFWWindow):Void {}
-	public static function glfwGetWindowMonitor(window:NativeGLFWWindow):NativeGLFWMonitor { return null; }
+	public static function glfwGetWindowMonitor(window:NativeGLFWWindow):NativeGLFWMonitor { return 0; }
 	public static function glfwSetWindowMonitor(window:NativeGLFWWindow, monitor:NativeGLFWMonitor, xPos:Int, yPos:Int, width:Int, height:Int, refreshRate:Int):Void {}
 	public static function glfwGetWindowAttrib(window:NativeGLFWWindow, attrib:Int):Int { return 0; }
 	public static function glfwSetWindowAttrib(window:NativeGLFWWindow, attrib:Int, value:Int):Void {}
 	public static function glfwGetInputMode(window:NativeGLFWWindow, mode:Int):Int { return 0; }
 	public static function glfwSetInputMode(window:NativeGLFWWindow, mode:Int, value:Int):Void {}
 	public static function glfwMakeContextCurrent(window:NativeGLFWWindow):Void {}
-	public static function glfwGetCurrentContext():NativeGLFWWindow { return null; }
+	public static function glfwGetCurrentContext():NativeGLFWWindow { return 0; }
 	public static function glfwSetClipboardString(window:NativeGLFWWindow, string:String):Void {}
 	public static function glfwGetClipboardString(window:NativeGLFWWindow):hl.Bytes { return null; }
 	public static function glfwSwapBuffers(window:NativeGLFWWindow):Void {}
 
-	public static function glfwCreateStandardCursor(shape:Int):NativeGLFWCursor { return null; }
+	public static function glfwCreateStandardCursor(shape:Int):NativeGLFWCursor { return 0; }
 	public static function glfwDestroyCursor(cursor:NativeGLFWCursor):Void {}
 	public static function glfwSetCursor(window:NativeGLFWWindow, cursor:NativeGLFWCursor):Void {}
 	public static function glfwRawMouseMotionSupported():Int { return 0; }

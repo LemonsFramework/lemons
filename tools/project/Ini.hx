@@ -14,7 +14,9 @@ class Ini {
 	public var globalVariables:IniSection = [];
 	public var sections:Map<String, IniSection> = [];
 
-	public function new(string:String) {
+	public function new() {}
+
+	public function parse(string:String):Ini {
 		final lines:Array<String> = string.split('\n');
 
 		var curSection:String = '';
@@ -43,7 +45,34 @@ class Ini {
 			else if (entryValue.charAt(0) == '\"' || entryValue.charAt(0) == '\'') section[entryName] = entryValue.substr(1, entryValue.length - 2);
 			else section[entryName] = entryValue;
 		}
+
+		return this;
 	}
+
+	public function toString():String {
+		var buffer:StringBuf = new StringBuf();
+
+		inline function addEntry(key:String, value:IniEntry) {
+			buffer.add(key);
+			buffer.add(' = ');
+			buffer.add(stringifyValue(value));
+			buffer.add('\n');
+		}
+
+		for (key => value in globalVariables) addEntry(key, value);
+
+		for (name => section in sections) {
+			buffer.add('\n');
+			buffer.add('[$name]');
+			buffer.add('\n');
+			for (key => value in section) addEntry(key, value);
+		}
+
+		return buffer.toString();
+	} 
+
+	inline function stringifyValue(val:IniEntry):String
+		return if (val is String) '\'$val\''; else Std.string(val);
 
 	inline function isComment(string:String):Bool
 		return string.charAt(0) == ';' || string.charAt(0) == '#';

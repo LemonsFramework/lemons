@@ -9,14 +9,13 @@ class GLFWWindow extends Window {
 
 	public function new(width:Int, height:Int, title:String) {
 		super(width, height, title);
-		if (!initialized) {
+		if (!initialized)
 			GLFW.glfwInit();
-			GLFW.glfwInitHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3);
-			GLFW.glfwInitHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 3);
-			GLFW.glfwInitHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE);
-		}
 
-		windowHandle = GLFW.glfwCreateWindow(width, height, title, null, null);
+		GLFW.glfwInitHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3);
+		GLFW.glfwInitHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 3);
+		GLFW.glfwInitHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE);
+		windowHandle = GLFW.glfwCreateWindow(width, height, title, (0:hl.I64), (0:hl.I64));
 	}
 
 	override public function close():Void {}

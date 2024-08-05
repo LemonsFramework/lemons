@@ -4,7 +4,6 @@
 
 package lemons.display.render._backend;
 
-@SuppressWarnings("checkstyle:CodeSimilarity")
 @:hlNative('lemons', 'gl_')
 class OpenGL {
 	public static final GL_DEPTH_BUFFER_BIT:Int = 0x00000100;
@@ -1332,8 +1331,6 @@ class OpenGL {
 	public static final GL_CLEAR_TEXTURE:Int = 0x9365;
 	public static final GL_NUM_SAMPLE_COUNTS:Int = 0x9380;
 
-	public static function gladLoadGl():Int { return 0; }
-
 	public static function glActiveShaderProgram(pipeline:Int, program:Int):Void {}
 	public static function glActiveTexture(texture:Int):Void {}
 	public static function glAttachShader(program:Int, shader:Int):Void {}
@@ -1415,7 +1412,7 @@ class OpenGL {
 	public static function glCreateShader(type:Int):Int { return 0; }
 	public static function glCreateShaderProgramv(type:Int, count:Int, strings:hl.NativeArray<hl.Bytes>):Int { return 0; }
 	public static function glCullFace(mode:Int):Void {}
-	// public static function glDebugMessageCallback(callback:(Int->Int->Int->Int->Int)->hl.Bytes, userParam:hl.Bytes):Void {}
+	// public static function glDebugMessageCallback(callback:(Int->Int->Int->Int->Int->hl.Bytes), userParam:hl.Bytes):Void {}
 	// public static function glDebugMessageControl(source:Int, type:Int, severity:Int, count:Int, ids:hl.Ref<Int>, enabled:Int):Void {}
 	// public static function glDebugMessageInsert(source:Int, type:Int, id:Int, severity:Int, length:Int, buf:String):Void {}
 	public static function glDeleteBuffers(n:Int, buffers:hl.Ref<Int>):Void {}
@@ -1480,15 +1477,15 @@ class OpenGL {
 	public static function glFramebufferTexture3D(target:Int, attachment:Int, textarget:Int, texture:Int, level:Int, zoffset:Int):Void {}
 	public static function glFramebufferTextureLayer(target:Int, attachment:Int, texture:Int, level:Int, layer:Int):Void {}
 	public static function glFrontFace(mode:Int):Void {}
-	public static function glGenBuffers(n:Int, buffers:hl.Ref<Int>):Void {}
-	public static function glGenFramebuffers(n:Int, framebuffers:hl.Ref<Int>):Void {}
-	public static function glGenProgramPipelines(n:Int, pipelines:hl.Ref<Int>):Void {}
-	public static function glGenQueries(n:Int, ids:hl.Ref<Int>):Void {}
-	public static function glGenRenderbuffers(n:Int, renderbuffers:hl.Ref<Int>):Void {}
-	public static function glGenSamplers(count:Int, samplers:hl.Ref<Int>):Void {}
-	public static function glGenTextures(n:Int, textures:hl.Ref<Int>):Void {}
-	public static function glGenTransformFeedbacks(n:Int, ids:hl.Ref<Int>):Void {}
-	public static function glGenVertexArrays(n:Int, arrays:hl.Ref<Int>):Void {}
+	public static function glGenBuffers():Int { return 0; }
+	public static function glGenFramebuffers():Int { return 0; }
+	public static function glGenProgramPipelines():Int { return 0; }
+	public static function glGenQueries():Int { return 0; }
+	public static function glGenRenderbuffers():Int { return 0; }
+	public static function glGenSamplers():Int { return 0; }
+	public static function glGenTextures():Int { return 0; }
+	public static function glGenTransformFeedbacks():Int { return 0; }
+	public static function glGenVertexArrays():Int { return 0; }
 	public static function glGenerateMipmap(target:Int):Void {}
 	public static function glGetActiveAtomicCounterBufferiv(program:Int, bufferIndex:Int, pname:Int, params:hl.Ref<Int>):Void {}
 	public static function glGetActiveAttrib(program:Int, index:Int, bufSize:Int, length:hl.Ref<Int>, size:hl.Ref<Int>, type:hl.Ref<Int>, name:String):Void {}
@@ -1907,4 +1904,6 @@ class OpenGL {
 	public static function glViewportIndexedf(index:Int, x:hl.F32, y:hl.F32, w:hl.F32, h:hl.F32):Void {}
 	public static function glViewportIndexedfv(index:Int, v:hl.Ref<hl.F32>):Void {}
 	public static function glWaitSync(sync:hl.Abstract<"GLSync">, flags:Int, timeout:hl.I64):Void {}
+
+	public static function gladLoadGl():Int { return 0; }
 }

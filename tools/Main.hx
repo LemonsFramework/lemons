@@ -4,7 +4,7 @@ class Main {
 	public function new() {
 		Sys.setCwd(libPath);
 
-		var args = Sys.args();
+		args = Sys.args();
 		originalPath = args.pop();
 
 		if (args.length == 0) {
@@ -29,6 +29,8 @@ class Main {
 				new tools.commands.RebuildCommand();
 			case 'test':
 				new tools.commands.TestCommand();
+			case 'setup':
+				new tools.commands.SetupCommand();
 			default:
 				Sys.println('\033[1;31merm... error\033[0m invalid command: $argThing');
 

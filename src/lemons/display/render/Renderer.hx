@@ -14,7 +14,7 @@ enum abstract RendererType(String) from String {
 class Renderer {
 	var window:Window;
 	public var driver:Driver;
-
+	
 	public function new(renderer:RendererType, width:Int, height:Int, window:Window) {
 		this.window = window;
 
@@ -30,6 +30,10 @@ class Renderer {
 			throw 'unable to initialize driver';
 
 		driver.setViewport(0, 0, width, height);
+	}
+
+	public function createVertexArray():VertexArray {
+		return new VertexArray(driver);
 	}
 
 	public function prepare() {

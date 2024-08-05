@@ -1,9 +1,13 @@
 package tools.commands;
 
 import sys.io.Process;
+import tools.project.Ini;
 
 class RebuildCommand {
+
 	public function new() {
+		Sys.setCwd(setup.globalVariables['liblemonsDirectory']);
+
 		if (Sys.systemName().toLowerCase() == 'windows') { // whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 			try {
 				// the visual studio installer should always be here; if not im gonna have a panic attack
@@ -26,9 +30,8 @@ class RebuildCommand {
 		}
 
 
-		Sys.command('cd $libPath/liblemons');
 		Sys.command('mkdir make');
-		Sys.command('cd make');
+		Sys.setCwd(Sys.getCwd() + '/make');
 		Sys.command('cmake ..');
 		Sys.command('cmake --build .');
 	}

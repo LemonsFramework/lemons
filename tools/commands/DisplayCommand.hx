@@ -17,7 +17,7 @@ class DisplayCommand {
 			return;
 		}
 
-		var parsedProject:Project = new Project(new Ini(project));
+		var parsedProject:Project = new Project(new Ini().parse(project));
 
 		Sys.println(parsedProject.toArgList().join('\n'));
 	}

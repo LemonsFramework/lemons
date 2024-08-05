@@ -7,6 +7,6 @@ class TestCommand {
 		if (build.exitCode != 0) return;
 
 		Sys.command('cd', [build.parsedProject.getOutputPath()]);
-		Sys.command(build.parsedProject.getOutputFilename(), []);
+		Sys.command('hl', [build.parsedProject.getOutputFilename()]);
 	}
 }

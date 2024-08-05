@@ -20,12 +20,12 @@ class BuildCommand {
 			return;
 		}
 
-		parsedProject = new Project(new Ini(project));
+		parsedProject = new Project(new Ini().parse(project));
 
 		exitCode = Sys.command('haxe ' + parsedProject.toArgList().join(' '));
 
-		var libraryFiles:Array<String> = sys.FileSystem.readDirectory(libPath + '/liblemons/out/').filter((str) -> return !str.contains('.pdb')); 
+		var libraryFiles:Array<String> = sys.FileSystem.readDirectory(setup.globalVariables['liblemonsDirectory'] + '/out').filter((str) -> return !str.contains('.pdb')); 
 		for (file in libraryFiles)
-			sys.io.File.copy(libPath + '/liblemons/out/' + file, parsedProject.getOutputPath() + '/' + file);
+			sys.io.File.copy(setup.globalVariables['liblemonsDirectory'] + '/out/' + file, parsedProject.getOutputPath() + '/' + file);
 	}
 }

@@ -1,12 +1,18 @@
 package tools;
 
 import sys.io.Process;
+import tools.project.Ini;
 
 using StringTools;
 
 class Util {
+	@:allow(tools.Main)
+	private static var args:Array<String> = [];
+
 	public static var libPath:String = '';
 	public static var originalPath:String = '';
+	public static var setup:Ini;
+
 
 	private static function __init__() {
 		var process = new Process('haxelib', ['path', 'lemons']);
@@ -23,5 +29,22 @@ class Util {
 
 
 		process.close();
+
+		Sys.setCwd(libPath);
+
+		try {
+			setup = new Ini().parse(File.getContent('setup.ini'));
+		} catch(e) {
+			setup = new Ini();
+			setup.globalVariables['liblemonsDirectory'] = '$libPath/liblemons';
+			File.saveContent('setup.ini', setup.toString());
+		}
+	}
+
+	public static function iterateThroughArguments(callback:String->Bool, escapeOnReturn:Bool = false) {
+		for (arg in args) {
+			var theReturn:Bool = callback(args.shift());
+			if (escapeOnReturn && theReturn) return;
+		}
 	}
 }
