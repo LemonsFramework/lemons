@@ -1,2 +1,2 @@
-import lemons.display.Colour;
+import lemons.display.Color;
 using StringTools;

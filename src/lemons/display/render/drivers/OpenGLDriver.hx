@@ -18,7 +18,7 @@ class OpenGLDriver extends Driver {
 	}
 
 	override public function prepare() {
-		OpenGL.glClearColor(backgroundColour.redFloat, backgroundColour.greenFloat, backgroundColour.blueFloat, backgroundColour.alphaFloat);
+		OpenGL.glClearColor(backgroundColor.redFloat, backgroundColor.greenFloat, backgroundColor.blueFloat, backgroundColor.alphaFloat);
 		OpenGL.glClear(OpenGL.GL_COLOR_BUFFER_BIT);
 	}
 

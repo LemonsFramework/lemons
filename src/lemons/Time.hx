@@ -13,7 +13,7 @@ class Time {
 		while (app.window.live) {
 			final time:Float = app.window.time;
 			delta = time - lastTimestamp;
-			if (delta <= desiredDelta) continue;
+			if (delta <= desiredDelta) Sys.sleep(desiredDelta - delta);
 			lastTimestamp = time;
 
 			updateFunc();
