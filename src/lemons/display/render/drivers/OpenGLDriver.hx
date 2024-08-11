@@ -22,16 +22,28 @@ class OpenGLDriver extends Driver {
 		OpenGL.glClear(OpenGL.GL_COLOR_BUFFER_BIT);
 	}
 
-	override public function createNativeVertexArray():Dynamic {
+	override public function createNativeVertexBuffer():Dynamic {
 		var buf = OpenGL.glGenBuffers();
 		return buf;
 	}
 
-	override public function bufferVertexArray(vertArray:Dynamic, verticies:Array<Single>) {
+	override public function bufferVertexBuffer(vertBuf:Dynamic, verticies:Array<Single>) {
 		var size = verticies.length * 4;
 
-		OpenGL.glBindBuffer(OpenGL.GL_ARRAY_BUFFER, vertArray);
+		OpenGL.glBindBuffer(OpenGL.GL_ARRAY_BUFFER, vertBuf);
 		OpenGL.glBufferData(OpenGL.GL_ARRAY_BUFFER, size, hl.Bytes.getArray(verticies), OpenGL.GL_STATIC_DRAW);
 	}
 
+	override public function createNativeVertexArray():Dynamic {
+		var arr = OpenGL.glGenVertexArrays();
+		return arr;
+	}
+
+	override public function setupVertexArray(vertArray:Dynamic, size:Int, stride:Int, offset:Int) {
+		OpenGL.glVertexAttribPointer(vertArray, size, OpenGL.GL_FLOAT, OpenGL.GL_FALSE, stride, hl.Bytes.fromAddress(0));
+	}
+
+	// override public function draw(vertArray:Dynamic,  offset:Int, length:Int) {
+	// 	glVertexAttribPointer(vertArray, size, OpenGL.GL_FLOAT, OpenGL.GL_FALSE, side, hl.Bytes.fromAddress(0));
+	// }
 }

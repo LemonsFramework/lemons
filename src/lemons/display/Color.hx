@@ -20,26 +20,21 @@ abstract Color(Int) to Int {
 		this = int;
 	}
 
-	function get_alpha():Int 
-		return ((this >> 24) & 0xFF);
-	function get_red():Int 
-		return ((this >> 16) & 0xFF);
-	function get_green():Int 
-		return ((this >> 8) & 0xFF);
-	function get_blue():Int 
-		return ((this) & 0xFF);
+	function get_alpha():Int return ((this >> 24) & 0xFF);
+	function get_red():Int return ((this >> 16) & 0xFF);
+	function get_green():Int return ((this >> 8) & 0xFF);
+	function get_blue():Int return ((this) & 0xFF);
 
-	function get_alphaFloat():Float 
-		return alpha / 255;
-	function get_redFloat():Float 
-		return red / 255;
-	function get_greenFloat():Float 
-		return green / 255;
-	function get_blueFloat():Float 
-		return blue / 255;
+	function get_alphaFloat():Float return alpha / 255;
+	function get_redFloat():Float return red / 255;
+	function get_greenFloat():Float return green / 255;
+	function get_blueFloat():Float return blue / 255;
 
-	function toString():String
-		return '#' + this.hex(8);
+	function toString():String return '#' + this.hex(8);
+
+
+	// function reconstruct(r:Int, g:Int, b:Int, a:Int):Void 
+		// this = 
 }
 
 typedef Colour = lemons.display.Color;
