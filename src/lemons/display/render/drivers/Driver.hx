@@ -1,6 +1,7 @@
 package lemons.display.render.drivers;
 
 import lemons.display.render.Window;
+import lemons.display.shader.Shader;
 
 class Driver {
 	public var backgroundColor:Color = 0x00000000;
@@ -15,5 +16,7 @@ class Driver {
 	public function setupVertexArray(vertArray:Dynamic, size:Int, stride:Int, offset:Int) {} 
 	public function draw(vertArray:Dynamic, offset:Int, length:Int) {}
 
-	// public function createProgram(vertex:Shader, pixel:Shader) {}
+	public function createProgram(vertex:Shader, pixel:Shader) {}
+	public function createShader(type:ShaderType):Dynamic { return null; }
+	public function compileShader(shader:Shader):Int { return 0; }
 }

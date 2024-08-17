@@ -3,6 +3,7 @@ package lemons.display.render.drivers;
 import lemons.display.render._backend.OpenGL;
 import lemons.display.render._backend.GLFW;
 import lemons.display.render.Window;
+import lemons.display.shader.Shader;
 
 class OpenGLDriver extends Driver {
 	override public function init():Bool {
@@ -41,6 +42,19 @@ class OpenGLDriver extends Driver {
 
 	override public function setupVertexArray(vertArray:Dynamic, size:Int, stride:Int, offset:Int) {
 		OpenGL.glVertexAttribPointer(vertArray, size, OpenGL.GL_FLOAT, OpenGL.GL_FALSE, stride, hl.Bytes.fromAddress(0));
+	}
+
+	override public function createShader(type:ShaderType):Dynamic {
+		var shader = OpenGL.glCreateShader(switch (type) {
+			case VERTEX: OpenGL.GL_VERTEX_SHADER;
+			case PIXEL: OpenGL.GL_FRAGMENT_SHADER;
+		});
+		return shader;
+	}
+
+	override public function compileShader(shader:Shader):Int {
+		// var shader = OpenGL.glCreateShader();
+		return 0;
 	}
 
 	// override public function draw(vertArray:Dynamic,  offset:Int, length:Int) {

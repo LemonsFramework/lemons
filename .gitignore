@@ -1,3 +1,4 @@
 *.hl
-docs/
-pages/
+out
+setup.ini
+docs/theme

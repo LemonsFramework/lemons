@@ -1,5 +1,10 @@
 package lemons.display;
 
+/** 
+ * abstract used to indentify colo(u)r in lemons
+ * the internal format for color is AARRGGBB
+ * TODO: right now the abstract can't reconstruct itself, so you can't just set one component of the color unless you reconstruct it
+**/
 abstract Color(Int) to Int {
 	public var redFloat(get, never):Float;
 	public var greenFloat(get, never):Float;
@@ -37,4 +42,8 @@ abstract Color(Int) to Int {
 		// this = 
 }
 
+/** 
+ * the correct spelling of colour
+ * people hated that i used color primarily so this is now a typedef
+**/
 typedef Colour = lemons.display.Color;

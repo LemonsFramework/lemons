@@ -1,5 +1,8 @@
 package lemons.display.render;
 
+/** 
+ * base type for a window
+**/
 class Window {
 	@:isVar public var width(get, set):Int;
 	@:isVar public var height(get, set):Int;

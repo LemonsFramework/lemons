@@ -41,10 +41,10 @@ class Util {
 		}
 	}
 
-	public static function iterateThroughArguments(callback:String->Bool, escapeOnReturn:Bool = false) {
-		for (arg in args) {
-			var theReturn:Bool = callback(args.shift());
-			if (escapeOnReturn && theReturn) return;
-		}
-	}
+	// public static function removeArgument(arg:String) args.remove(args.indexOf(arg));
+	// public static function getArgument(arg:String):Bool {
+	// 	final reslut:Bool = args.indexOf(arg) != -1;
+	// 	if (reslut) removeArgument(arg);
+	// 	return reslut;
+	// }  
 }

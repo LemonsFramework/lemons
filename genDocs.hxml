@@ -1,4 +1,4 @@
--xml docs/doc.xml
+-xml docs/out/doc.xml
 extraParams.hxml
 -p src
 -hl dummy.hl
