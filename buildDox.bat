@@ -1,1 +1,4 @@
-haxelib run dox -i docs --title "lemons api reference" -D version "balls" -D website "https://github.com/ThePlank/lemons" -D logo "https://cdn.discordapp.com/attachments/1083070583245373564/1162054095910207528/Untitled12_20231008154638.png" -D themeColor 0xFFFF63 -D textColor 0xFFFF63 -D description "dumb game framework" -D source-path "https://github.com/ThePlank/lemons/tree/main/src"
+rem theme will be avalible later when i finish it
+haxelib run dox -i docs -o docs -theme docs/theme
+cd docs/out
+haxelib run snake-server 
