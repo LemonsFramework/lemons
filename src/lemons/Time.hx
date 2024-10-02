@@ -9,7 +9,6 @@ class Time {
 	**/
 	public static var self(default, null):Time;
 
-
 	/** 
 	 * target framerate of the game
 	**/
@@ -21,7 +20,7 @@ class Time {
 	public  var delta(default, null):Float;
 
 	/** 
-	 * create a new instance of `Time`
+	 * creates a new instance of `Time`
 	 * @throws Exception `cannot have more than one main loop` when a `Time` already exists. use `Time.self` instead
 	**/
 	public function new():Void {

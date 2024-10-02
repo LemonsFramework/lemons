@@ -1,6 +1,7 @@
 package lemons.display.render;
 
-import lemons.display.render._backend.GLFW;
+import lemons.display.render._internal.GLFW;
+import lemons.display.render._internal.OpenGL;
 
 @SuppressWarnings("checkstyle:CodeSimilarity") 
 class GLFWWindow extends Window {
@@ -15,6 +16,7 @@ class GLFWWindow extends Window {
 		GLFW.glfwInitHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3);
 		GLFW.glfwInitHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 3);
 		GLFW.glfwInitHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE);
+		GLFW.glfwInitHint(GLFW.GLFW_OPENGL_FORWARD_COMPAT, OpenGL.GL_TRUE);
 		windowHandle = GLFW.glfwCreateWindow(width, height, title, (0:hl.I64), (0:hl.I64));
 	}
 

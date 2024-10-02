@@ -32,7 +32,9 @@ class App {
 		init();
 
 		new Time().start(() -> {
-			renderer.prepare();
+			update();
+			final _data:RendererData = renderer.prepare();
+			draw(_data);
 		}, this);
 	}
 
@@ -43,7 +45,11 @@ class App {
 
 	/**
 	 * main update function
-	 * @param delta time between the last update call in seconds
 	**/
-	public function update(delta:Float):Void {}
+	public function update():Void {}
+
+	/**
+	 * main draw function
+	**/
+	public function draw(_data:RendererData):Void {}
 }

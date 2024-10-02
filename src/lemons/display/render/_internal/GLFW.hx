@@ -1,4 +1,4 @@
-package lemons.display.render._backend;
+package lemons.display.render._internal;
 
 typedef NativeGLFWMonitor = hl.I64;
 typedef NativeGLFWWindow = hl.I64;

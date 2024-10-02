@@ -1,8 +1,8 @@
--xml docs/out/doc.xml
+-xml docs/doc.xml
 extraParams.hxml
 -p src
 -hl dummy.hl
 -D gen_docs
+-dce no
 lemons
-
--cmd buildDox.bat
+# -cmd buildDox.bat

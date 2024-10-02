@@ -1,6 +1,7 @@
 package lemons.display.shader;
 
 import lemons.display.render.Renderer;
+import lemons.geometry.Matrix;
 
 enum abstract ShaderType(Int) to Int {
 	var VERTEX = 0;
@@ -24,16 +25,17 @@ enum abstract ShaderType(Int) to Int {
  * final somePixelShader:Shader = Shader.fromResource(PIXEL, /*some resource here*\/);
  * ``` 
  *   
- * TODO: write some lexer and transpiler for glsl since all the transpiler i can find are in c++
+ * TODO: write some lexer and transpiler for glsl since all the transpilers i can find are in c++ and not c
 **/
+@:allow(lemons.display.render.Renderer)
 class Shader {
 	public var shaderType(default, null):ShaderType = VERTEX; 
 
 	var _source:String;
+	var _nativeHandle:Int = -1;
 	var _compiled:Bool = false;
-	var _nativeHandle:Int = 0;
 
-	public function new(shaderType:ShaderType) {
+	private function new(shaderType:ShaderType) {
 		this.shaderType = shaderType;
 	}
 
@@ -41,9 +43,5 @@ class Shader {
 		final shader:Shader = new Shader(type);
 		shader._source = source;
 		return shader;
-	}
-
-	function compile(renderer:Renderer):Void {
-		_nativeHandle = renderer.driver.createShader(shaderType);
 	}
 }

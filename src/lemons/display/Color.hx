@@ -18,7 +18,7 @@ abstract Color(Int) to Int {
 
 	@:from
 	static function fromInt(int:Int) {
-		return new Colour(int);
+		return new Color(int);
 	}
 
 	public function new(int:Int) {

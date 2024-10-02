@@ -2,7 +2,7 @@
 	Generated with liblemons' GLADGenerator https://github.com/LemonsFramework/liblemons
 */
 
-package lemons.display.render._backend;
+package lemons.display.render._internal;
 
 @:hlNative('lemons', 'gl_')
 class OpenGL {
@@ -54,7 +54,7 @@ class OpenGL {
 	public static final GL_TRUE:Int = 1;
 	public static final GL_ONE:Int = 1;
 	public static final GL_INVALID_INDEX:Int = 0xFFFFFFFF;
-	// public static final GL_TIMEOUT_IGNORED:Int = 0xFFFFFFFFFFFFFFFF;
+	// public static final GL_TIMEOUT_IGNORED:haxe.Int64 = 0xFFFFFFFFFFFFFFFF;
 	public static final GL_POINTS:Int = 0x0000;
 	public static final GL_LINES:Int = 0x0001;
 	public static final GL_LINE_LOOP:Int = 0x0002;
@@ -1369,7 +1369,7 @@ class OpenGL {
 	public static function glBlendFuncSeparatei(buf:Int, srcRGB:Int, dstRGB:Int, srcAlpha:Int, dstAlpha:Int):Void {}
 	public static function glBlendFunci(buf:Int, src:Int, dst:Int):Void {}
 	public static function glBlitFramebuffer(srcX0:Int, srcY0:Int, srcX1:Int, srcY1:Int, dstX0:Int, dstY0:Int, dstX1:Int, dstY1:Int, mask:Int, filter:Int):Void {}
-	public static function glBufferData(target:Int, size:hl.Ref<Int>, data:hl.Bytes, usage:Int):Void {}
+	public static function glBufferData(target:Int, size:Int, data:hl.Bytes, usage:Int):Void {}
 	public static function glBufferStorage(target:Int, size:hl.Ref<Int>, data:hl.Bytes, flags:Int):Void {}
 	public static function glBufferSubData(target:Int, offset:hl.Ref<Int>, size:hl.Ref<Int>, data:hl.Bytes):Void {}
 	public static function glCheckFramebufferStatus(target:Int):Int { return 0; }
@@ -1445,7 +1445,7 @@ class OpenGL {
 	public static function glDrawArraysInstancedBaseInstance(mode:Int, first:Int, count:Int, instancecount:Int, baseinstance:Int):Void {}
 	public static function glDrawBuffer(buf:Int):Void {}
 	public static function glDrawBuffers(n:Int, bufs:hl.Ref<Int>):Void {}
-	public static function glDrawElements(mode:Int, count:Int, type:Int, indices:hl.Bytes):Void {}
+	public static function glDrawElements(mode:Int, count:Int, type:Int, indices:Int):Void {}
 	public static function glDrawElementsBaseVertex(mode:Int, count:Int, type:Int, indices:hl.Bytes, basevertex:Int):Void {}
 	public static function glDrawElementsIndirect(mode:Int, type:Int, indirect:hl.Bytes):Void {}
 	public static function glDrawElementsInstanced(mode:Int, count:Int, type:Int, indices:hl.Bytes, instancecount:Int):Void {}
@@ -1716,7 +1716,7 @@ class OpenGL {
 	public static function glSecondaryColorP3ui(type:Int, color:Int):Void {}
 	public static function glSecondaryColorP3uiv(type:Int, color:hl.Ref<Int>):Void {}
 	public static function glShaderBinary(count:Int, shaders:hl.Ref<Int>, binaryFormat:Int, binary:hl.Bytes, length:Int):Void {}
-	public static function glShaderSource(shader:Int, count:Int, string:hl.NativeArray<hl.Bytes>, length:hl.Ref<Int>):Void {}
+	public static function glShaderSource(shader:Int, string:String):Void {}
 	public static function glShaderStorageBlockBinding(program:Int, storageBlockIndex:Int, storageBlockBinding:Int):Void {}
 	public static function glStencilFunc(func:Int, ref:Int, mask:Int):Void {}
 	public static function glStencilFuncSeparate(face:Int, func:Int, ref:Int, mask:Int):Void {}
@@ -1756,57 +1756,39 @@ class OpenGL {
 	public static function glTextureView(texture:Int, target:Int, origtexture:Int, internalformat:Int, minlevel:Int, numlevels:Int, minlayer:Int, numlayers:Int):Void {}
 	public static function glTransformFeedbackVaryings(program:Int, count:Int, varyings:hl.NativeArray<hl.Bytes>, bufferMode:Int):Void {}
 	public static function glUniform1d(location:Int, x:hl.F64):Void {}
-	public static function glUniform1dv(location:Int, count:Int, value:hl.Ref<hl.F64>):Void {}
 	public static function glUniform1f(location:Int, v0:hl.F32):Void {}
-	public static function glUniform1fv(location:Int, count:Int, value:hl.Ref<hl.F32>):Void {}
 	public static function glUniform1i(location:Int, v0:Int):Void {}
-	public static function glUniform1iv(location:Int, count:Int, value:hl.Ref<Int>):Void {}
 	public static function glUniform1ui(location:Int, v0:Int):Void {}
-	public static function glUniform1uiv(location:Int, count:Int, value:hl.Ref<Int>):Void {}
 	public static function glUniform2d(location:Int, x:hl.F64, y:hl.F64):Void {}
-	public static function glUniform2dv(location:Int, count:Int, value:hl.Ref<hl.F64>):Void {}
 	public static function glUniform2f(location:Int, v0:hl.F32, v1:hl.F32):Void {}
-	public static function glUniform2fv(location:Int, count:Int, value:hl.Ref<hl.F32>):Void {}
 	public static function glUniform2i(location:Int, v0:Int, v1:Int):Void {}
-	public static function glUniform2iv(location:Int, count:Int, value:hl.Ref<Int>):Void {}
 	public static function glUniform2ui(location:Int, v0:Int, v1:Int):Void {}
-	public static function glUniform2uiv(location:Int, count:Int, value:hl.Ref<Int>):Void {}
 	public static function glUniform3d(location:Int, x:hl.F64, y:hl.F64, z:hl.F64):Void {}
-	public static function glUniform3dv(location:Int, count:Int, value:hl.Ref<hl.F64>):Void {}
 	public static function glUniform3f(location:Int, v0:hl.F32, v1:hl.F32, v2:hl.F32):Void {}
-	public static function glUniform3fv(location:Int, count:Int, value:hl.Ref<hl.F32>):Void {}
 	public static function glUniform3i(location:Int, v0:Int, v1:Int, v2:Int):Void {}
-	public static function glUniform3iv(location:Int, count:Int, value:hl.Ref<Int>):Void {}
 	public static function glUniform3ui(location:Int, v0:Int, v1:Int, v2:Int):Void {}
-	public static function glUniform3uiv(location:Int, count:Int, value:hl.Ref<Int>):Void {}
 	public static function glUniform4d(location:Int, x:hl.F64, y:hl.F64, z:hl.F64, w:hl.F64):Void {}
-	public static function glUniform4dv(location:Int, count:Int, value:hl.Ref<hl.F64>):Void {}
 	public static function glUniform4f(location:Int, v0:hl.F32, v1:hl.F32, v2:hl.F32, v3:hl.F32):Void {}
-	public static function glUniform4fv(location:Int, count:Int, value:hl.Ref<hl.F32>):Void {}
 	public static function glUniform4i(location:Int, v0:Int, v1:Int, v2:Int, v3:Int):Void {}
-	public static function glUniform4iv(location:Int, count:Int, value:hl.Ref<Int>):Void {}
 	public static function glUniform4ui(location:Int, v0:Int, v1:Int, v2:Int, v3:Int):Void {}
-	public static function glUniform4uiv(location:Int, count:Int, value:hl.Ref<Int>):Void {}
-	public static function glUniformBlockBinding(program:Int, uniformBlockIndex:Int, uniformBlockBinding:Int):Void {}
-	public static function glUniformMatrix2dv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F64>):Void {}
-	public static function glUniformMatrix2fv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F32>):Void {}
-	public static function glUniformMatrix2x3dv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F64>):Void {}
-	public static function glUniformMatrix2x3fv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F32>):Void {}
-	public static function glUniformMatrix2x4dv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F64>):Void {}
-	public static function glUniformMatrix2x4fv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F32>):Void {}
-	public static function glUniformMatrix3dv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F64>):Void {}
-	public static function glUniformMatrix3fv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F32>):Void {}
-	public static function glUniformMatrix3x2dv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F64>):Void {}
-	public static function glUniformMatrix3x2fv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F32>):Void {}
-	public static function glUniformMatrix3x4dv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F64>):Void {}
-	public static function glUniformMatrix3x4fv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F32>):Void {}
-	public static function glUniformMatrix4dv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F64>):Void {}
-	public static function glUniformMatrix4fv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F32>):Void {}
-	public static function glUniformMatrix4x2dv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F64>):Void {}
-	public static function glUniformMatrix4x2fv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F32>):Void {}
-	public static function glUniformMatrix4x3dv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F64>):Void {}
-	public static function glUniformMatrix4x3fv(location:Int, count:Int, transpose:Int, value:hl.Ref<hl.F32>):Void {}
-	public static function glUniformSubroutinesuiv(shadertype:Int, count:Int, indices:hl.Ref<Int>):Void {}
+	public static function glUniformMatrix2dv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix2fv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix2x3dv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix2x3fv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix2x4dv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix2x4fv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix3dv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix3fv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix3x2dv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix3x2fv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix3x4dv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix3x4fv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix4dv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix4fv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix4x2dv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix4x2fv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix4x3dv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
+	public static function glUniformMatrix4x3fv(location:Int, count:Int, transpose:Int, value:hl.Bytes):Void {}
 	public static function glUnmapBuffer(target:Int):Int { return 0; }
 	public static function glUseProgram(program:Int):Void {}
 	public static function glUseProgramStages(pipeline:Int, stages:Int, program:Int):Void {}
@@ -1891,7 +1873,7 @@ class OpenGL {
 	public static function glVertexAttribP3uiv(index:Int, type:Int, normalized:Int, value:hl.Ref<Int>):Void {}
 	public static function glVertexAttribP4ui(index:Int, type:Int, normalized:Int, value:Int):Void {}
 	public static function glVertexAttribP4uiv(index:Int, type:Int, normalized:Int, value:hl.Ref<Int>):Void {}
-	public static function glVertexAttribPointer(index:Int, size:Int, type:Int, normalized:Int, stride:Int, pointer:hl.Bytes):Void {}
+	public static function glVertexAttribPointer(index:Int, size:Int, type:Int, normalized:Int, stride:Int, offset:Int):Void {}
 	public static function glVertexBindingDivisor(bindingindex:Int, divisor:Int):Void {}
 	public static function glVertexP2ui(type:Int, value:Int):Void {}
 	public static function glVertexP2uiv(type:Int, value:hl.Ref<Int>):Void {}
