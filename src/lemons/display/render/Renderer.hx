@@ -158,7 +158,7 @@ class Renderer {
 					curUniform = curUniform.next;
 				}
 			}
-
+			prog._uniformQueue = null;
 			return;
 		}
 

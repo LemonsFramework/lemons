@@ -39,6 +39,10 @@ class Time {
 	**/
 	public function start(updateFunc:Void->Void, app:lemons.App) {
 		while (app.window.live) {
+			#if profiler
+			hl.Profile.event(-1);
+			#end
+
 			final time:Float = app.window.time;
 			delta = time - _timestamp;
 
@@ -48,6 +52,11 @@ class Time {
 			app.window.update();
 
 			_timestamp = time;
+
+			#if profiler
+			hl.Profile.event(0);
+			hl.Profile.event(-2);
+			#end
 		}
 	}
 
