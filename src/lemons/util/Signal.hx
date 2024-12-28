@@ -1,5 +1,9 @@
 package lemons.util;
 
+
+// TODO: this class is non functional for cases like Void->Void, fix that
+
+
 class Signal<I, R> {
     private var listeners:Array<{func:I->R, once:Bool}> = [];
 

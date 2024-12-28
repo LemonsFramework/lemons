@@ -1,35 +1,24 @@
-> [!CAUTION]
-> this repository is VERY old, and a rewrite is going to happen soon.
-> 
-> currently, lemons is using the builtin hashlink extensions for openal, opengl and sdl etc, but they lack a lot of functionality that i want.
-> 
-> oh also the entire redering pipeline sucks and its broken
+<img src="art/LogoWithText.png"/>
 
-# <img src="art/tmpLogoWithText.png"/> (old logo)
+lemons is a game framework that's built on haxe that provides.. well what a game framework should, a framework to build your games on
 
-idk another haxe game framework smh my head
+# installing
 
-this only supports hashlink because fuck you !!
+there isnt a haxelib version avalible yet so you'll have to follow the installing from github instructions
 
-code example:
+## installing from github
+go to your bash shell of choice or command prompt and run
 
-```haxe
-package;
-
-import sys.io.File;
-
-import lemons.App;
-import lemons.sound.Sound;
-
-class Main extends App {
-	override public function init():Void {
-		var sound:Sound = Sound.createFromBytes(File.getBytes('${Sys.getCwd()}\\res\\testsong.wav'));
-		sound.volume = 0.75;
-		sound.loop = true;
-		sound.play();
-	}
-
-	static public function main()
-		var app = new Main();
-}
 ```
+cd <whereever you want to install lemons in>
+git clone --recurse-submodules https://github.com/LemonsFramework/lemons.git
+cd lemons
+haxelib dev .
+```
+since `haxelib git` doesent recursivley clone submodules, you have to use this janky fix
+
+you will need to follow the building instructions at the bottom if you're installing it from github
+
+# building
+
+again, go to your bash shell of choice or command prompt and run `haxelib run lemons rebuild`. oh, and you'll have to have cmake installed.	
